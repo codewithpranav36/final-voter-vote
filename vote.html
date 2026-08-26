@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cast Your Vote</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🗳️ Cast Your Vote</h1>
+
+    <div class="voter-info">
+
+        <p>
+            <b>Voter:</b>
+            {{ voter["name"] }}
+        </p>
+
+        <p>
+            <b>District:</b>
+            {{ voter["district"] }}
+        </p>
+
+    </div>
+
+
+    <h3>Select One Candidate</h3>
+
+
+    <form action="/submit_vote" method="POST">
+
+        {% for candidate in candidates %}
+
+        <label class="candidate">
+
+            <input
+                type="radio"
+                name="candidate"
+                value="{{ candidate['id'] }}"
+                required
+            >
+
+            <div>
+
+                <strong>
+                    {{ candidate["name"] }}
+                </strong>
+
+                <br>
+
+                <span>
+                    {{ candidate["party"] }}
+                </span>
+
+            </div>
+
+        </label>
+
+        {% endfor %}
+
+
+        <button type="submit">
+            Submit Vote
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

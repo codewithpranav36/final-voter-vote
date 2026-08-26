@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container admin">
+
+    <h1>📊 Admin Dashboard</h1>
+
+
+    <div class="total">
+
+        <h2>
+            Total Votes: {{ total_votes }}
+        </h2>
+
+    </div>
+
+
+    <!-- CANDIDATE RESULTS -->
+
+    <h2>Election Results</h2>
+
+    <table>
+
+        <tr>
+            <th>Candidate</th>
+            <th>Party</th>
+            <th>Votes</th>
+        </tr>
+
+        {% for candidate in candidates %}
+
+        <tr>
+
+            <td>
+                {{ candidate["name"] }}
+            </td>
+
+            <td>
+                {{ candidate["party"] }}
+            </td>
+
+            <td>
+                {{ candidate["votes"] }}
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+
+    <!-- VOTER STATUS -->
+
+    <h2>Voter Status</h2>
+
+    <table>
+
+        <tr>
+
+            <th>Voter ID</th>
+            <th>Name</th>
+            <th>District</th>
+            <th>Status</th>
+
+        </tr>
+
+        {% for voter in voters %}
+
+        <tr>
+
+            <td>
+                {{ voter["voter_id"] }}
+            </td>
+
+            <td>
+                {{ voter["name"] }}
+            </td>
+
+            <td>
+                {{ voter["district"] }}
+            </td>
+
+            <td>
+
+                {% if voter["voted"] == 1 %}
+
+                    <span class="voted">
+                        Voted
+                    </span>
+
+                {% else %}
+
+                    <span class="not-voted">
+                        Not Voted
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+
+    <a href="/">
+        <button>
+            Back to Voting
+        </button>
+    </a>
+
+</div>
+
+</body>
+</html>

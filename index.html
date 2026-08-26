@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RFID Electronic Voting</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🗳️ RFID Based Electronic Voting</h1>
+
+    <p class="subtitle">
+        Secure Remote Voting Prototype
+    </p>
+
+
+    <!-- ERROR MESSAGE -->
+
+    {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+    {% endif %}
+
+
+    <!-- LOGIN FORM -->
+
+    <form action="/login" method="POST">
+
+        <label>Voter ID</label>
+
+        <input
+            type="text"
+            name="voter_id"
+            placeholder="Enter Voter ID"
+            required
+        >
+
+
+        <label>RFID UID</label>
+
+        <input
+            type="text"
+            name="rfid_uid"
+            placeholder="Scan / Enter RFID UID"
+            required
+        >
+
+
+        <button type="submit">
+            Authenticate
+        </button>
+
+    </form>
+
+
+    <!-- OTP -->
+
+    {% if otp_generated %}
+
+        <div class="otp-box">
+
+            <h3>OTP Generated</h3>
+
+            <p>Your Demo OTP:</p>
+
+            <strong>{{ demo_otp }}</strong>
+
+        </div>
+
+
+        <form action="/verify" method="POST">
+
+            <label>Enter OTP</label>
+
+            <input
+                type="text"
+                name="otp"
+                maxlength="6"
+                placeholder="Enter 6 digit OTP"
+                required
+            >
+
+            <button type="submit">
+                Verify OTP
+            </button>
+
+        </form>
+
+    {% endif %}
+
+
+    <!-- DEMO INFORMATION -->
+
+    <div class="demo">
+
+        <h3>Demo Voters</h3>
+
+        <p><b>VOTER001</b> → RFID001</p>
+        <p><b>VOTER002</b> → RFID002</p>
+        <p><b>VOTER003</b> → RFID003</p>
+        <p><b>VOTER004</b> → RFID004</p>
+        <p><b>VOTER005</b> → RFID005</p>
+
+    </div>
+
+
+    <a class="admin-link" href="/admin">
+        Admin Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>
